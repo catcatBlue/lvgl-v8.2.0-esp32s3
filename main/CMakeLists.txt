@@ -2,6 +2,7 @@
 
 file(GLOB_RECURSE SOURCES_C *.c
                             ./lv_port/*.c
+                            lvgl/demos/**/*.c
                             )
 file(GLOB_RECURSE SOURCES_CPP *.cpp)
 
@@ -11,5 +12,4 @@ idf_component_register(
                     ./lv_port
     REQUIRES        lvgl
                     lvgl_esp32_drivers
-                    bsp
     )

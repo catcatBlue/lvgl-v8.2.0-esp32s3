@@ -52,7 +52,7 @@ void app_main()
 {
     xTaskCreate(example_task1,             /* 指向需要创建的任务 */
                 "example_task1",           /* 任务的文本名字，用于调试 */
-                1024 * 8,                  /* 栈深，单位字 */
+                1024 * 8,                  /* 栈深，单位字节 */
                 NULL,                      /* 传入任务的参数 */
                 configMAX_PRIORITIES - 24, /* 任务优先级 */
                 NULL                       /* 控制该任务的句柄，注意要'&' */

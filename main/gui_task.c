@@ -39,12 +39,6 @@
 #endif
 #include "lvgl_helpers.h"
 
-#if !CONFIG_USE_ESP32_DISP_DRIVERS
-#include "lvgl_touch/tp_spi.h"
-#include "lvgl_i2c_conf.h"
-#include "driver/i2c.h"
-#endif
-
 #include "lv_port/lv_port.h"
 #include "lvgl/demos/lv_demos.h"
 
@@ -107,7 +101,6 @@ static void guiTask(void *pvParameter)
     /* 显示初始化 */
     lv_port_disp_init();
 
-#if CONFIG_USE_ESP32_DISP_DRIVERS
     /* Initialize SPI or I2C bus used by the drivers */
     /**
      * 由于设置显示器的分辨率不再是全局定义的，
@@ -115,15 +108,6 @@ static void guiTask(void *pvParameter)
      * 因为其中包括设置spi最大传输大小，这里需要屏幕分辨率参数
      */
     lvgl_driver_init();
-#else
-    ESP_LOGI(TAG, "Initializing I2C master for touch");
-
-    lvgl_i2c_driver_init(TOUCH_I2C_PORT,
-                         TOUCH_I2C_SDA, TOUCH_I2C_SCL,
-                         TOUCH_I2C_SPEED_HZ);
-
-    touch_driver_init();
-#endif
 
     /* 输入设备初始化 */
     lv_port_indev_init();
